@@ -9,6 +9,9 @@ if (-not (git config --global --get-all safe.directory | Where-Object { $_ -eq $
 
 if (-not ((Test-Path README.md) -and (Select-String -Path README.md -SimpleMatch "# ManHrish" -Quiet))) { Add-Content -Path README.md -Value "# ManHrish" -Encoding utf8 }
 if (-not (Test-Path .git)) { git init }
+# Commit identity for this repository (only if not already set)
+if (-not (git config user.email)) { git config user.email "aphekade@gmail.com" }
+if (-not (git config user.name))  { git config user.name "Amol Hekade" }
 git add README.md
 if (-not (git rev-parse --verify HEAD 2>$null)) { git commit -m "first commit" }
 git add .
